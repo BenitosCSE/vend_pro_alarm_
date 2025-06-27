@@ -1,0 +1,2 @@
+# vend_pro_alarm_info
+vend_pro_alarm_info
