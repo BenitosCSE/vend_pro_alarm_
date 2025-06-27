@@ -1,0 +1,24 @@
+{
+  "name": "VEND PRO Довідник Помилок",
+  "short_name": "VEND PRO",
+  "description": "Інформаційний довідник помилок для автоматів VEND PRO",
+  "start_url": "/vend_pro_alarms_info_Index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#1a1a1a",
+  "theme_color": "#ff8c01",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "uk"
+} 

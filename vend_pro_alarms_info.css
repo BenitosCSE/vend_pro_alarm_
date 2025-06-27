@@ -1,0 +1,547 @@
+/* --------- Global Reset & Base --------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Dark Theme (Default) */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #000;
+  --text-primary: #ffffff;
+  --text-secondary: #ccc;
+  --border-color: #333;
+  --btn-bg: linear-gradient(to right, #ff8c01, #ffc400);
+  --btn-text: #2b2929;
+  --panel-bg: #222;
+  --panel-header: #333;
+  --input-bg: #222;
+  --input-border: #555;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --btn-bg: linear-gradient(to right, #ff8c01, #ffc400);
+  --btn-text: #ffffff;
+  --panel-bg: #ffffff;
+  --panel-header: #f0f0f0;
+  --input-bg: #ffffff;
+  --input-border: #ccc;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  color: var(--text-primary);
+  background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+  transition: background 0.3s ease, color 0.3s ease;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+/* --------- Container Styles --------- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 80px 20px 20px;
+  width: 100%;
+  max-width: 95%;
+  margin: auto;
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 650px;
+  }
+}
+
+/* --------- ЛОГОТИП & ПІДТИТУЛЬНИЙ НАПИС--------- */
+.logo {
+  font-size: 4rem;
+  font-weight: 800;
+  text-shadow: 0 0 6px #f1ba71;
+  background: linear-gradient(to right, #f5ba3c, #ff9100de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin-top: 40px;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 400px;
+}
+.subtitle {
+  font-size: 1.4rem;
+  font-weight: 500;
+  background: linear-gradient(to left, #ffffff, #ff9900);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 6px #000000, 0 0 12px #ffffff, 0 0 18px #000000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 25px;
+  text-align: center;
+  white-space: nowrap !important;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* --------- КНОПКИ --------- */
+.btn {
+  width: 100%;
+  max-width: 400px;
+  margin: 15px 0;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 1000;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  touch-action: manipulation;
+  min-height: 44px;
+}
+.btn:hover {
+  transform: scale(1.02);
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.048) 0%,
+    rgba(255, 222, 132, 0.301) 20%,
+    rgba(253, 152, 0, 0.5) 80%,
+    rgba(255, 255, 255, 0.336) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 4s linear infinite;
+}
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+  /* --------- КНОПКА НАЗАД --------- */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease;
+  touch-action: manipulation;
+  min-height: 36px;
+}
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --------- Machine Page --------- */
+.watermark {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  font-size: 4.5rem;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0.05;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  animation: scroll-v 35s linear infinite;
+}
+
+@keyframes scroll-v {
+  from { transform: translate(-50%, -100%); }
+  to { transform: translate(-50%, 100vh); }
+}
+
+.machine-content {
+  margin-top: 80px;
+  width: 100%;
+  text-align: center;
+}
+.machine-content p {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 4.2px;
+  margin-bottom: 25px;
+}
+.machine-content input[type="text"] {
+  width: 100% !important;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  margin-bottom: 15px;
+}
+.machine-content input[type="text"]::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+.machine-content .enter-btn {
+  margin-top: 25px;
+}
+
+/* --------- Error Display --------- */
+.error-container {
+  margin-top: 40px;
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+.error-code {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.error-msg {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #eee;
+}
+
+/* --------- Accordion Panels --------- */
+.accordion {
+  margin-top: 20px;
+  width: 100%;
+}
+.panel {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background: #333;
+  cursor: pointer;
+}
+.panel-header span:first-child {
+  flex: 1;
+  text-align: center;
+}
+.panel-header .toggle-icon {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+.panel-content {
+  display: none;
+  padding: 15px;
+  background: #111;
+  color: #ddd;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.panel-content p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+.panel-content .copy-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.panel-content .copy-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-right: 10px;
+}
+.panel-content .collapse-btn {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  background: #444;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.panel-content .collapse-btn:hover {
+  background: #555;
+}
+
+.accordion-body {
+  white-space: pre-line;
+  text-align: left;
+}
+
+/* --------- Hidden Utility --------- */
+.hidden {
+  display: none !important;
+}
+
+pre, .accordion-body, .error-text, .steps, [data-steps] {
+  white-space: pre-line !important;
+  text-align: left !important;
+}
+
+.content-area {
+  margin-top: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* --------- Mobile Styles --------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 100px 20px 20px;
+  }
+  
+  .logo {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .machine-content {
+    margin-top: 60px;
+  }
+  
+  .machine-content p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+  }
+  
+  .machine-content input[type="text"] {
+    width: 100% !important;
+    max-width: 400px !important;
+    padding: 15px;
+    font-size: 1.1rem;
+    min-height: 44px;
+  }
+  
+  .btn {
+    max-width: 400px;
+    padding: 18px;
+    min-height: 50px;
+    font-size: 1.1rem;
+  }
+  
+  .back-btn {
+    top: 10px;
+    left: 10px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    min-height: 40px;
+  }
+}
+
+/* --------- Small Mobile Styles --------- */
+@media (max-width: 480px) {
+  .container {
+    padding: 120px 15px 20px;
+  }
+  
+  .logo {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 0.8px;
+  }
+  
+  .machine-content p {
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+  }
+  
+  .btn {
+    padding: 20px;
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .error-container {
+    padding: 15px;
+  }
+  
+  .panel-header {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .panel-content {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* --------- Fade Transitions --------- */
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-out {
+  animation: fade-out 0.2s forwards;
+}
+.fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.logo-bold {
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.logo-thin {
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* --------- Theme Toggle --------- */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--text-primary);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+}
+
+/* --------- Landscape Video Player & Modal Fix --------- */
+@media (orientation: landscape) and (max-width: 896px) {
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+  }
+  
+  .modal-close-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 15px;
+    right: 15px;
+  }
+}
+
+/* Modal styles Fix*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.modal-content {
+    background: transparent; /* Прибираємо білий фон */
+    padding: 0; /* Прибираємо відступи */
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    width: 800px;
+    height: 450px;
+    display: flex; /* Для центрування iframe */
+    align-items: center;
+    justify-content: center;
+}
+.modal-close-btn {
+    position: absolute;
+    top: -30px; /* Виносимо над відео */
+    right: 0px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff; /* Робимо хрестик білим */
+    border: none;
+    background: none;
+    transition: transform 0.2s ease;
+}
+.modal-close-btn:hover {
+    transform: scale(1.2);
+}
+.modal-content iframe {
+    width: 100%;
+    height: 100%;
+} 
